@@ -1,0 +1,201 @@
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1a1a1a;
+  padding: 20px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.todo-card {
+  background: #2d2d2d;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 500px;
+  border: 1px solid #C4AD9D;
+}
+
+.todo-title {
+  text-align: center;
+  color: #E9E6DD;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  font-family: "Courier New", Courier, monospace;
+  letter-spacing: 1px;
+}
+
+.todo-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.todo-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 2px solid #C4AD9D;
+  border-radius: 4px;
+  font-size: 1rem;
+  background-color: #3d3d3d;
+  color: #E9E6DD;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.todo-input:focus {
+  outline: none;
+  border-color: #0274BD;
+  background-color: #4d4d4d;
+}
+
+.todo-button {
+  padding: 8px 16px;
+  background-color: #0274BD;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+.todo-button:hover {
+  background-color: #025d97;
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.task-empty {
+  text-align: center;
+  color: #C4AD9D;
+  padding: 1rem;
+  font-style: italic;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  margin-bottom: 8px;
+  background-color: #3d3d3d;
+  border-radius: 4px;
+  border: 1px solid #C4AD9D;
+  transition: all 0.2s ease;
+}
+
+.task-item:hover {
+  transform: translateX(5px);
+  background-color: #4d4d4d;
+  border-color: #0274BD;
+}
+
+.task-text {
+  flex: 1;
+  margin-right: 10px;
+  color: #E9E6DD;
+}
+
+.task-text.done {
+  text-decoration: line-through;
+  color: #C4AD9D;
+}
+
+.task-buttons {
+  display: flex;
+  gap: 5px;
+}
+
+.button-done {
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #2e7d32;
+  color: white;
+  transition: background-color 0.2s;
+}
+
+.button-done.done {
+  background-color: #825d4d;
+}
+
+.button-edit {
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #1565c0;
+  color: white;
+  transition: background-color 0.2s;
+}
+
+.button-delete {
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #c62828;
+  color: white;
+  transition: background-color 0.2s;
+}
+
+.edit-form {
+  display: flex;
+  gap: 5px;
+  width: 100%;
+}
+
+.edit-input {
+  flex: 1;
+  padding: 4px 8px;
+  border: 2px solid #C4AD9D;
+  border-radius: 4px;
+  background-color: #3d3d3d;
+  color: #E9E6DD;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.edit-input:focus {
+  outline: none;
+  border-color: #0274BD;
+  background-color: #4d4d4d;
+}
+
+.edit-save {
+  padding: 4px 8px;
+  background-color: #2e7d32;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.edit-cancel {
+  padding: 4px 8px;
+  background-color: #757575;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+}
+
+button:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
