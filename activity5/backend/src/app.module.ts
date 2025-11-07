@@ -1,16 +1,7 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { TodoModule } from './todo/todo.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
-  imports: [
-    TypeOrmModule.forRoot({
-      type: 'sqlite',
-      database: 'todo.db',
-      autoLoadEntities: true,
-      synchronize: true, // ⚠️ for dev only
-    }),
-    TodoModule,
-  ],
+  imports: [AuthModule],
 })
 export class AppModule {}
