@@ -57,11 +57,42 @@ function App() {
     </svg>
   )
 
+  const IconSun = ({ size = 16 }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+      <path d="M12 4V2M12 22v-2M4.93 4.93L3.51 3.51M20.49 20.49l-1.42-1.42M2 12H4M20 12h2M4.93 19.07l1.42-1.42M20.49 3.51l-1.42 1.42" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="12" cy="12" r="3" stroke="currentColor" strokeWidth="1.4" />
+    </svg>
+  )
+
+  const IconMoon = ({ size = 16 }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
+      <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+
   useEffect(() => {
     fetchBooks()
     fetchAuthors()
     fetchCategories()
   }, [])
+
+  // Theme handling (light/dark) - persistent via localStorage
+  const [theme, setTheme] = useState(() => {
+    try {
+      return localStorage.getItem('theme') || 'light'
+    } catch (e) {
+      return 'light'
+    }
+  })
+
+  useEffect(() => {
+    try {
+      document.documentElement.setAttribute('data-theme', theme)
+      localStorage.setItem('theme', theme)
+    } catch (e) {
+      // ignore
+    }
+  }, [theme])
 
   function fetchBooks() {
     fetch(API + '/books')
@@ -299,6 +330,17 @@ function App() {
       </div>
       <header className="app-header dramatic-header">
         <h1 className="dramatic-title">꧁༺ Activity 3: Bookshelf API + UI ༻꧂</h1>
+        <div className="header-actions">
+          <button
+            className="theme-toggle"
+            onClick={() => setTheme(t => (t === 'light' ? 'dark' : 'light'))}
+            aria-pressed={theme === 'dark'}
+            title="Toggle light / dark"
+          >
+            {theme === 'light' ? <IconMoon /> : <IconSun />}
+            <span className="visually-hidden">Toggle theme</span>
+          </button>
+        </div>
       </header>
 
       <section className="card card-row">
