@@ -44,6 +44,7 @@
   background-color: #3d3d3d;
   color: #E9E6DD;
   font-family: "Courier New", Courier, monospace;
+  min-width: 0;
 }
 
 .todo-input:focus {
@@ -99,19 +100,55 @@
 }
 
 .task-text {
-  flex: 1;
+  flex: 1 1 auto;
+  min-width: 0;
   margin-right: 10px;
   color: #E9E6DD;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .task-text.done {
-  text-decoration: line-through;
   color: #C4AD9D;
+  opacity: 0.9;
+}
+
+
+.task-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1 1 auto;
+  min-width: 0; 
+}
+
+.task-check {
+  width: 22px;
+  height: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1;
+  color: transparent;
+  background: transparent;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.task-check.checked {
+  background-color: #2e7d32;
+  color: white;
+}
+
+.task-check:not(.checked) {
+  border: 1px solid rgba(255,255,255,0.06);
 }
 
 .task-buttons {
   display: flex;
   gap: 5px;
+  flex: 0 0 auto; 
 }
 
 .button-done {
@@ -162,6 +199,7 @@
   background-color: #3d3d3d;
   color: #E9E6DD;
   font-family: "Courier New", Courier, monospace;
+  min-width: 0;
 }
 
 .edit-input:focus {

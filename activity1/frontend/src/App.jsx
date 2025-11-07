@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import './App.css';
 
-const API_URL = "http://localhost:3000/todos"; // adjust port if needed
+const API_URL = "http://localhost:3000/todos"; 
 
 function App() {
   const [tasks, setTasks] = useState([]);
@@ -40,13 +40,13 @@ function App() {
   return (
     <div className="app-container">
       <div className="todo-card">
-        <h1 className="todo-title">To-Do List</h1>
+        <h1 className="todo-title">Act 1: To-Do List</h1>
         <form className="todo-form" onSubmit={handleAdd}>
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Add a new task..."
+            placeholder="What do you need to do?"
             required
             className="todo-input"
           />
@@ -54,7 +54,7 @@ function App() {
         </form>
         <ul className="task-list">
           {tasks.length === 0 && (
-            <li className="task-empty">No tasks yet.</li>
+            <li className="task-empty">No tasks yet...</li>
           )}
           {tasks.map((task, idx) => (
             <li key={idx} className="task-item">
@@ -72,7 +72,15 @@ function App() {
                 </form>
               ) : (
                 <>
-                  <span className={`task-text ${task.done ? "done" : ""}`}>{task.text}</span>
+                  <div className="task-left">
+                    <span
+                      className={`task-check ${task.done ? "checked" : ""}`}
+                      aria-hidden="true"
+                    >
+                      ✓
+                    </span>
+                    <span className={`task-text ${task.done ? "done" : ""}`}>{task.text}</span>
+                  </div>
                   <div className="task-buttons">
                     <button
                       type="button"
