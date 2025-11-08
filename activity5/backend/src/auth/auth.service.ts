@@ -61,5 +61,27 @@ export class AuthService {
         return { access_token: this.jwtService.sign(payload), success: true }
     }
 
+    async changePassword(userId: number, oldPassword: string, newPassword: string) {
+        try {
+            const users: any = await this.db.query('SELECT * FROM accounts WHERE userID = ? LIMIT 1', [userId]);
+            if (!users || users.length === 0) {
+                return { success: false, message: 'User not found' };
+            }
+
+            const user = users[0];
+            const valid = await bcrypt.compare(oldPassword, user.password);
+            if (!valid) {
+                return { success: false, message: 'Current password is incorrect' };
+            }
+
+            const hashed = await bcrypt.hash(newPassword, 10);
+            await this.db.query('UPDATE accounts SET password = ? WHERE userID = ?', [hashed, userId]);
+            return { success: true, message: 'Password updated successfully' };
+        } catch (err) {
+            console.error('Change password error:', err);
+            return { success: false, message: 'Failed to change password' };
+        }
+    }
+
 }
  

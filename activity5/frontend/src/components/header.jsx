@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { jwtDecode } from "jwt-decode";
+import * as jwtModule from "jwt-decode";
+const jwtDecode = jwtModule?.default ?? jwtModule?.jwtDecode ?? jwtModule;
 import { Link } from "react-router-dom";
 
 export function Header({LoginOpen, SigninOpen}) {
