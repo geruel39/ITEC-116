@@ -44,7 +44,7 @@ export class AuthService {
     async login(username: string, password: string) {
         const users: any = await this.db.query('SELECT * FROM accounts WHERE username = ? LIMIT 1', [username],);
 
-        if(users.lenght === 0){
+        if(users.length === 0){
             return { message: "Invalid Credentials", success: false }
             
         }

@@ -1,17 +1,30 @@
+import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  // ✅ Enable CORS for your React app
-  app.enableCors({
-    origin: ['http://localhost:5173', 'http://localhost:3001'], // frontend origins
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true,
-  });
+  // Enable CORS for frontend
+  app.enableCors();
+
+  // Enable validation and transformation
+  app.useGlobalPipes(new ValidationPipe({ transform: true }));
+
+  // Swagger setup
+  const config = new DocumentBuilder()
+    .setTitle('Notes API + UI')
+    .setDescription('Create a personal notes app with login and register. Each user can have private notes.')
+    .setVersion('1.0')
+    .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
 
   await app.listen(3000);
-  console.log('✅ Backend running on http://localhost:3000');
+  console.log('Backend running on http://localhost:3000');
+  console.log('Swagger available at http://localhost:3000/api');
 }
+
 bootstrap();
