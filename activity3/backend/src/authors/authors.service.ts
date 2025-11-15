@@ -8,8 +8,8 @@ export class AuthorsService {
   constructor(@InjectRepository(Author) private repo: Repository<Author>) {}
 
   create(name: string) {
-    const a = this.repo.create({ name });
-    return this.repo.save(a);
+    const author = this.repo.create({ name });
+    return this.repo.save(author);
   }
 
   findAll() {

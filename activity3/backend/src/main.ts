@@ -5,12 +5,14 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
   // Enable CORS for frontend
   app.enableCors();
-  // Enable transformation but avoid aggressive whitelist stripping
-  // (whitelist removes properties unless class-validator decorators are present)
+
+  // Enable validation and transformation
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
 
+  // Swagger setup
   const config = new DocumentBuilder()
     .setTitle('Bookshelf API')
     .setDescription('CRUD for books, authors, categories')
@@ -19,9 +21,6 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
-
-  // Allow requests from frontend (vite) during development
-  app.enableCors();
 
   await app.listen(3000);
   console.log('Backend running on http://localhost:3000');
