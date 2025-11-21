@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Param, Body } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Patch, Param, Body } from '@nestjs/common';
 import { TodoService } from './todo.service';
 import { CreateTodoDto } from './dto/create-todo.dto';
 import { UpdateTodoDto } from './dto/update-todo.dto';
@@ -30,10 +30,17 @@ export class TodoController {
     return this.todoService.findOne(id);
   }
 
-  // 🟡 UPDATE
+  // 🟡 FULL UPDATE
   @Put(':id')
   @ApiOperation({ summary: 'Update a task' })
   update(@Param('id') id: number, @Body() data: UpdateTodoDto) {
+    return this.todoService.update(id, data);
+  }
+
+  // 🟡 PARTIAL UPDATE (PATCH)
+  @Patch(':id')
+  @ApiOperation({ summary: 'Partially update a task' })
+  partialUpdate(@Param('id') id: number, @Body() data: Partial<UpdateTodoDto>) {
     return this.todoService.update(id, data);
   }
 
