@@ -3,74 +3,104 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Weather API</title>
+  <title>Weather Proxy - Activity 4</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
     body {
-      font-family: "Poppins", sans-serif;
-      background: linear-gradient(120deg, #4D4646, #F54927);
-      color: #333;
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
       display: flex;
-      flex-direction: column;
-      align-items: center;
       justify-content: center;
+      align-items: center;
       height: 100vh;
       margin: 0;
+      color: #fff;
     }
 
     .card {
-      background: #A39689;
-      border-radius: 15px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      padding: 30px;
-      width: 320px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      padding: 40px;
+      width: 350px;
       text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    h2 {
+      font-family: 'Montserrat', sans-serif;
+      margin-bottom: 25px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      font-size: 24px;
     }
 
     input {
-      width: 80%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 2px solid #52402E;
-      border-radius: 10px;
+      width: 90%;
+      padding: 12px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      border: none;
       outline: none;
       font-size: 16px;
     }
 
     button {
-      background: #52402E;
+      background: #ff9a9e;
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
       border: none;
-      color: black;
-      padding: 10px 20px;
-      border-radius: 10px;
-      cursor: pointer;
+      padding: 12px 25px;
+      border-radius: 12px;
       font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
       transition: 0.3s;
+      color: #333;
     }
 
     button:hover {
-      background: whitesmoke;
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     }
 
     .result {
-      margin-top: 20px;
+      margin-top: 25px;
+      font-size: 16px;
+    }
+
+    .result h3 {
+      margin-bottom: 10px;
+      font-weight: 600;
+      font-size: 20px;
     }
 
     .error {
-      color: red;
+      color: #ff4d4d;
       font-weight: 500;
     }
   </style>
 </head>
+
 <body>
   <div class="card">
-    <h2>Weather API - Activity 4</h2>
+    <h2>Weather Proxy API</h2>
     <input type="text" id="city" placeholder="Enter city name..." />
     <button onclick="getWeather()">Get Weather</button>
-
     <div id="output" class="result"></div>
   </div>
 
   <script>
+    function capitalizeWords(str) {
+      return str.replace(/\b\w/g, char => char.toUpperCase());
+    }
+
     async function getWeather() {
       const city = document.getElementById("city").value.trim();
       const output = document.getElementById("output");
@@ -88,9 +118,9 @@
 
         if (res.ok) {
           output.innerHTML = `
-            <h3>${data.city}</h3>
+            <h3>${capitalizeWords(data.city)}</h3>
             <p>Temperature: <strong>${data.temperature} °C</strong></p>
-            <p>Condition: <strong>${data.condition}</strong></p>
+            <p>Condition: <strong>${capitalizeWords(data.condition)}</strong></p>
           `;
         } else {
           output.innerHTML = `<p class="error">${data.message}</p>`;

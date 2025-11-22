@@ -1,23 +1,25 @@
 import { Injectable, HttpException } from "@nestjs/common";
 import { HttpService } from "@nestjs/axios";
 import { firstValueFrom } from "rxjs";
-import { AxiosResponse } from "axios";
+import { CreateWeatherDto } from "./dto/create-weather.dto";
+import { WeatherResponseDto } from "./dto/weather-response.dto";
 
 @Injectable()
 export class WeatherService {
   constructor(private readonly httpService: HttpService) {}
 
-  async getWeather(city: string): Promise<any> {
-    const apiKey = "8387b43714e736b0d4296517564e1201"; 
+  private apiKey = "8387b43714e736b0d4296517564e1201";
+
+  async getWeather(dto: CreateWeatherDto): Promise<WeatherResponseDto> {
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather`;
 
     try {
-      const response: AxiosResponse<any> = await firstValueFrom(
+      const response = await firstValueFrom(
         this.httpService.get(apiUrl, {
           params: {
-            q: `${city},PH`, 
-            appid: apiKey,
-            units: "metric", 
+            q: `${dto.city},PH`,
+            appid: this.apiKey,
+            units: "metric",
           },
         })
       );
